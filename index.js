@@ -38,7 +38,7 @@ async function run() {
         })
 
         // adding a toy
-        app.post('/newAddedToy', async(req, res) => {
+        app.post('/newAddedToy', async (req, res) => {
             const newToy = req.body;
             console.log(newToy)
             const result = await addedToyCollection.insertOne(newToy)
@@ -46,20 +46,30 @@ async function run() {
         })
 
         // getting user specific data
-        app.get('/newAddedToy', async(req, res) => {
+        app.get('/newAddedToy', async (req, res) => {
             console.log(req.query);
             let query = {};
-            if(req.query?.sellerEmail){
-                query = {email: req.query.sellerEmail}
+            if (req.query?.sellerEmail) {
+                query = { sellerEmail: req.query.sellerEmail }
             }
             const result = await addedToyCollection.find(query).toArray()
             res.send(result)
         })
 
-        // all toys
-        app.get('/allToys', async(req, res) =>{
+        // all toys data load
+        app.get('/allToys', async (req, res) => {
             const result = await addedToyCollection.find().toArray();
             res.send(result)
+        })
+
+        // shop by category
+        app.get('/allToys/:text', async (req, res) => {
+            console.log(req.params.text)
+            if (req.params.text == 'classic' || req.params.text == 'modern' || req.params.text == 'construction') {
+                const result = await addedToyCollection.find({ subcategory: req.params.text}).toArray();
+                return res.send(result)
+            }
+
         })
 
 
