@@ -1,15 +1,14 @@
 {
-    "versions": 2,
     "builds": [
         {
             "src": "./index.js",
-            "use": "@varcel/node"
+            "use": "@vercel/node"
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "/",
+            "dest": "/", 
             "methods": ["GET", "POST", "PATCH", "DELETE", "OPTIONS"]
         }
     ]
