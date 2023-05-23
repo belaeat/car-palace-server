@@ -67,6 +67,7 @@ async function run() {
             console.log(req.params.text)
             if (req.params.text == 'classic' || req.params.text == 'modern' || req.params.text == 'construction') {
                 const result = await addedToyCollection.find({ subcategory: req.params.text}).toArray();
+                // console.log(result)
                 return res.send(result)
             }
 
