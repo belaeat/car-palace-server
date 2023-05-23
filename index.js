@@ -45,6 +45,17 @@ async function run() {
             res.send(result)
         })
 
+        // getting user specific data
+        app.get('/newAddedToy', async(req, res) => {
+            console.log(req.query.sellerEmail);
+            let query = {};
+            if(req.query?.sellerEmail){
+                query = {email: req.query.sellerEmail}
+            }
+            const result = await addedToyCollection.find(query).toArray()
+            res.send(result)
+        })
+
 
 
         // Send a ping to confirm a successful connection
